@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: gray;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+label {
+    flex-basis: 100%;
+    margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+input[type="number"] {
+    flex-basis: calc(100% - 2rem);
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+
+/*button[type="submit"] {
+    flex-basis: 40%;
+    padding: 0.5rem;
+    background-color:#FFD700 ;
+    color: white;
+    border: 3px;;
+    border-radius: 20px;
+    cursor: pointer;
+}*/
+button[type="submit"] {
+  
+    position: relative;
+    padding: 1rem;
+    left : 660px; /* Position at the right end */
+    margin: 10px;
+    background-color: darkorchid;
+    color: white;
+    border: 3px solid; /* Added solid border */
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+/* CSS for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover effect on rows */
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+
+
+/* Responsive table */
+@media screen and (max-width: 600px) {
+    table {
+        border: 0;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table tr {
+        border-bottom: 2px solid #ddd;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        text-align: right;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+}
+
+#total-amount {
+    position: absolute;
+    right: 350px; /* Adjust this value to move the input field towards the left */
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid green;
+    background-color: darkorchid;
+    border-radius: 5px;
+    font-size: 16px;
+    
+}
+
+
+    </style>
+</head>
+<body>
+    <h1 >Expenses on </h1>
+    <h1 id="messageDisplay">Expenses for </h1>
+    <form id="expenseForm">
+        <label for="item">Item:</label>
+        <input type="text" id="item" name="item" required><br>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" step="0.01" required><br>
+        <button type="submit">Add Expense</button>
+       
+
+    </form>
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <!-- Data will be dynamically added here -->
+        </tbody>
+    </table>
+    <input type="text" id="total-amount" readonly>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js"></script>
+    <script type="module" src="cash_out.js"></script>
+</body>
+</html>

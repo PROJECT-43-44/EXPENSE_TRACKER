@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="staff_styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet"> <!-- Import Montserrat font -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            background-image: url('expense_pattern.jpg'); /* Add your background image here */
+            background-size: cover;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .login-box {
+            background-color: rgba(68, 68, 68, 0.8); /* Adjust the opacity as needed */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+        
+        .login-box input[type="email"],
+        .login-box input[type="password"],
+        .login-box input[type="text"]
+         {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            margin-left: 10px ;
+            border: none;
+            border-radius: 5px;
+            background-color: #ddd;
+        }
+        
+        #login_button {
+            width: 30%;
+            padding: 10px;
+           
+            border: none;
+            border-radius: 15px;
+            background-color: #FFD700; /* Dark Yellow */
+            color: #111;
+            cursor: pointer;
+        }
+
+        #signup_button{
+            width: 30%;
+            padding: 10px;
+           
+            border: none;
+            border-radius: 15px;
+            background-color: #FFD700; /* Dark Yellow */
+            color: #111;
+            cursor: pointer;
+        }
+        
+        .login-box input[type="submit"]:hover {
+            background-color: #FFC107; /* Lighter Shade of Yellow */
+        }
+        
+        .login-box a {
+            color: #FFD700; /* Dark Yellow */
+            text-decoration: none;
+        }
+        ā
+        .login-box a:hover {
+            color: #FFC107; /* Lighter Shade of Yellow */
+        }
+        #login_button{
+            margin-left: 15px;   
+             }
+    </style>
+</head>
+
+<body>
+    
+    <div class="container">
+        <div class="login-box">
+            <h2 style="color: #FFD700; text-align: center;">Expense Tracker</h2>
+            <input type="text" id="username" placeholder="User name">
+            <input type="email" id="email" placeholder="Email">
+            <input type="password" id="password" placeholder="Password">
+            <button id="login_button">Login</button>
+            <button id="signup_button" class="signup-btn">Sign Up</button> <!-- Sign Up button -->
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js"></script>
+    <script type="module">
+        // Your JavaScript code goes here
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getDatabase, ref, push, update } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword ,signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
+        
+        const appsettings = {
+    databaseURL: "https://expense-tracker-1e6e6-default-rtdb.firebaseio.com/"
+};
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyBGyUYjvjZXQ3Q-GY_xyT7coZHH0bMugyg",
+    authDomain: "expense-tracker-1e6e6.firebaseapp.com",
+    databaseURL: "https://expense-tracker-1e6e6-default-rtdb.firebaseio.com",
+    projectId: "expense-tracker-1e6e6",
+    storageBucket: "expense-tracker-1e6e6.appspot.com",
+    messagingSenderId: "962146764874",
+    appId: "1:962146764874:web:8fcc3f8e871faa335ffeb3",
+    measurementId: "G-81VQMH93YX"
+  }; 
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const auth = getAuth();
+
+        document.addEventListener("DOMContentLoaded", (e) => {
+            const signupButton = document.getElementById("signup_button");
+
+            signupButton.addEventListener("click", (e) => {
+                var email = document.getElementById("email").value;
+                var password = document.getElementById("password").value;
+
+               createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        // Signed up 
+                        const user = userCredential.user;
+                        alert('User created');
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        alert(errorMessage);
+                    });
+
+                });
+    });
+
+
+
+
+         document.addEventListener("DOMContentLoaded", (e) => {
+            const loginButton = document.getElementById("login_button");
+
+            loginButton.addEventListener("click", (e) => {
+                var email = document.getElementById("email").value;
+                var password = document.getElementById("password").value;
+                var username = document.getElementById("username").value;
+               
+                 localStorage.setItem('username',username);
+                   signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                       // Signed in 
+                     const user = userCredential.user;
+                     alert('Logined');
+                 
+                     window.location.href = "main.html";
+                            // ...
+                     })
+                       .catch((error) => {
+                       const errorCode = error.code;
+                        const errorMessage = error.message;
+
+                        alert(errorMessage);
+                     });
+
+        });
+    });
+
+    </script>
+</body>
+</html>
