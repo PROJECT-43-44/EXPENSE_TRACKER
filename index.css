@@ -1,0 +1,57 @@
+/* staff_styles.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: black;
+    background-image: url('expense_pattern.jpg');
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-box {
+    background-color: rgba(68, 68, 68, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+
+.login-box input[type="email"],
+.login-box input[type="password"],
+.login-box input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ddd;
+}
+
+#login_button,
+#signup_button {
+    width: 30%;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    background-color: #ffd700;
+    color: #111;
+    cursor: pointer;
+}
+
+.login-box input[type="submit"]:hover,
+.login-box a:hover {
+    background-color: #ffc107;
+}
+
+.login-box a {
+    color: #ffd700;
+    text-decoration: none;
+}
