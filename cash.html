@@ -1,88 +1,11 @@
- <!DOCTYPE html>
+<!-- cash.html -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: black; /* light purple background */
-}
-
-#title {
-    text-align: center;
-    font-family: 'Montserrat', sans-serif; /* Montserrat font */
-    font-weight: bold;
-    color: #ffffff; /* white color */
-    padding-top: 20px; /* Add space between title and buttons */
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-button {
-    padding: 15px 30px; /* increased padding for larger button size */
-    margin: 0;
-    border: none;
-    background-color: #ffffff; /* white background */
-    color: #333333; /* black text */
-    font-size: 18px; /* increased font size */
-    cursor: pointer;
-    position: relative; /* needed for positioning pseudo-element */
-    font-family: 'Montserrat', sans-serif; /* Montserrat font */
-}
-
-button:first-child {
-    border-top-left-radius: 20px; /* curve the top-left corner */
-    border-bottom-left-radius: 20px; /* curve the bottom-left corner */
-    margin-right: 5px; /* small gap between the first and second button */
-}
-
-button:last-child {
-    border-top-right-radius: 20px; /* curve the top-right corner */
-    border-bottom-right-radius: 20px; /* curve the bottom-right corner */
-}
-
-button::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: -1px; /* position the separator line to the right of the button */
-    height: 80%; /* adjust the height of the separator line */
-    width: 1px; /* thickness of the separator line */
-    background-color: #999999; /* color of the separator line */
-}
-
-button:last-child::after {
-    display: none; /* hide separator line after the last button */
-}
-
-button:hover {
-    background-color: #cccccc; /* light gray background on hover */
-}
-#numberLabel {
-            position: fixed; /* Fixed position */
-            bottom: 20px; /* Distance from the bottom of the page */
-            left: 50%; /* Center horizontally */
-            transform: translateX(-50%); /* Adjust horizontally to center */
-            background-color: #ffffff; /* White background */
-            padding: 10px 20px; /* Padding for content */
-            border-radius: 5px; /* Rounded corners */
-            font-size: 16px; /* Font size */
-            color: #333333; /* Text color */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet"> <!-- Import Montserrat font -->
+    <link rel="stylesheet" href="cash .css">
 </head>
 <body>
     <h1 id="title">expense Tracker </h1>
@@ -92,62 +15,6 @@ button:hover {
     </div>
     <label id="numberLabel">0</label>
     <canvas id="myPieChart" width="200" height="200"></canvas>
-    <script >
-      
-
-document.getElementById('numberLabel').textContent = '';
-
-let date = localStorage.getItem('message');
-document.getElementById('title').innerText = date;
-let connector = "in"; // Use a different variable name instead of "in"
-let new_date = date + ' ' + connector; // Concatenate the date and connector
-
-        document.addEventListener("DOMContentLoaded", function() {
-    const cash_out = document.getElementById("button2");
-
-    cash_out.addEventListener("click", function() {
-        window.location.href = 'cash_out.html'; // Redirect to the staff page
-    });
-});
-document.addEventListener("DOMContentLoaded", function() {
-    const staffButton = document.getElementById("button1");
-
-    staffButton.addEventListener("click", function() {
-        window.location.href = "cash_in.html"; // Redirect to the staff page
-    });
-});
-
-const total_cash_in= localStorage.getItem(new_date);
-const total_cash_out= localStorage.getItem(date);
-
-const numberLabel = document.getElementById("numberLabel");
-    numberLabel.innerText = total_cash_in-total_cash_out; // Set the number to 200
-
-     const ctx = document.getElementById('myPieChart').getContext('2d');
-const width = 200; // Adjust as needed
-const height = 200; // Adjust as needed
-
-const data = {
-    labels: ['cash in', 'cash out'],
-    datasets: [{
-        label: 'Expense',
-        data: [total_cash_in,total_cash_out], // Example data
-        backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)'
-        ]
-    }]
-};
-
-
-const myPieChart = new Chart(ctx, {
-    type: 'pie',
-    data: data
-});
-
-    </script>
+    <script src="cash.js"></script>
 </body>
 </html>
-
-
